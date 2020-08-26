@@ -8,17 +8,50 @@ public:
 
     ~Rectify();
 
+    /**
+     * Rectify stereo image and draw line
+     * @param src_image
+     * @return dst_image
+     */
     std::shared_ptr<cv::Mat> GetAlignImage(const cv::Mat &image);
 
+    /**
+     * Detect and match features of stereo image and draw matched points
+     * @param src_image
+     * @return dst_image
+     */
     std::shared_ptr<cv::Mat> GetMatchedImage(const cv::Mat &image);
 
+    /**
+     * Get the disparity image of stereo image
+     * @param src_image
+     * @return dst_image
+     */
     std::shared_ptr<cv::Mat> GetDisparityImage(const cv::Mat &image);
 
 private:
+    /**
+     * Rectify stereo image
+     * @param src_image
+     * @return dst_image
+     */
     std::shared_ptr<cv::Mat> AlignImage(const cv::Mat &image);
 
+    /**
+     * Draw lines
+     * @param src_image
+     */
     void DrawLine(cv::Mat &image);
 
+    /**
+     * Draw matched points
+     * @param img1, the left image of the stereo image
+     * @param img2, the right image of the stereo image
+     * @param keypoints1, the keypoints detected from the left image
+     * @param keypoints2, the keypoints detected from the right image
+     * @param matches, matched points
+     * @return dst_image
+     */
     std::shared_ptr<cv::Mat> DrawGoodMatches(const cv::Mat &img1,
                                              const cv::Mat &img2,
                                              const std::vector<cv::KeyPoint> &keypoints1,
